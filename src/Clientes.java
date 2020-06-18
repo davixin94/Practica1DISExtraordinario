@@ -82,11 +82,9 @@ public class Clientes {
 	}
 	@Override
 	public String toString() {
-		return "Clientes [nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", telefono=" + telefono
-				+ ", calle=" + calle + ", numero=" + numero + ", cp=" + cp + ", poblacion=" + poblacion + ", pais="
-				+ pais + "]";
+		
+	return "<cliente>\n\t<nombre>"+nombre +"</nombre>\n\t<apellidos>"+apellidos+"</apellidos>\n\t<email>"+email +"</email>\n\t<telefono>"+telefono +
+			"</telefono>\n\t<calle>"+calle +"</calle>\n\t<numero>"+numero +"</numero>\n\t<cp>"+cp +"</cp>\n\t<poblacion>"+poblacion +
+			"</poblacion>\n\t<pais>"+pais +"</pais>\n</cliente>";
 	}
-	
-	
-
 }

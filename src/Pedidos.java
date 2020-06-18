@@ -116,17 +116,14 @@ public class Pedidos {
 	public void setFechaEntrega(String fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
-
+	
 
 	@Override
 	public String toString() {
-		return "Pedidos [productos=" + productos + ", cantidad=" + cantidad + ", calle=" + calle + ", numero=" + numero
-				+ ", cp=" + cp + ", poblacion=" + poblacion + ", pais=" + pais + ", destinatario=" + destinatario
-				+ ", fechaEntrega=" + fechaEntrega + "]";
+	
+	return "<pedido>\n\t<productos>"+productos +"</productos>\n\t<cantidad>"+cantidad+"</cantidad>\n\t<calle>"+calle +"</calle>\n\t<numero>"+numero +
+			"</numero>\n\t<cp>"+cp +"</cp>\n\t<poblacion>"+poblacion +"</poblacion>\n\t<pais>"+pais +"</pais>\n\t<destinatario>"+destinatario +
+			"</destinatario>\n\t<fechaEntrega>"+fechaEntrega +"</fechaEntrega>\n</pedido>";
 	}
-	
-	
-	
-	
 
 }
