@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Pedidos {
 	
-	private ArrayList<String> productos;
+	private ArrayList<Producto> productos;
 	private int cantidad;
 	private String calle;
 	private int numero;
@@ -13,7 +13,7 @@ public class Pedidos {
 	private String fechaEntrega;
 	
 	
-	public Pedidos(ArrayList<String> productos, int cantidad, String calle, int numero, int cp, String poblacion,
+	public Pedidos(ArrayList<Producto> productos, int cantidad, String calle, int numero, int cp, String poblacion,
 			String pais, String destinatario, String fechaEntrega) {
 		super();
 		this.productos = productos;
@@ -28,14 +28,16 @@ public class Pedidos {
 	}
 
 
-	public ArrayList<String> getProductos() {
+	public ArrayList<Producto> getProductos() {
 		return productos;
 	}
 
 
-	public void setProductos(ArrayList<String> productos) {
+
+	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
 	}
+
 
 
 	public int getCantidad() {
@@ -43,9 +45,11 @@ public class Pedidos {
 	}
 
 
+
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+
 
 
 	public String getCalle() {
@@ -53,9 +57,11 @@ public class Pedidos {
 	}
 
 
+
 	public void setCalle(String calle) {
 		this.calle = calle;
 	}
+
 
 
 	public int getNumero() {
@@ -63,9 +69,11 @@ public class Pedidos {
 	}
 
 
+
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
+
 
 
 	public int getCp() {
@@ -73,9 +81,11 @@ public class Pedidos {
 	}
 
 
+
 	public void setCp(int cp) {
 		this.cp = cp;
 	}
+
 
 
 	public String getPoblacion() {
@@ -83,9 +93,11 @@ public class Pedidos {
 	}
 
 
+
 	public void setPoblacion(String poblacion) {
 		this.poblacion = poblacion;
 	}
+
 
 
 	public String getPais() {
@@ -93,9 +105,11 @@ public class Pedidos {
 	}
 
 
+
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
+
 
 
 	public String getDestinatario() {
@@ -103,9 +117,11 @@ public class Pedidos {
 	}
 
 
+
 	public void setDestinatario(String destinatario) {
 		this.destinatario = destinatario;
 	}
+
 
 
 	public String getFechaEntrega() {
@@ -113,10 +129,12 @@ public class Pedidos {
 	}
 
 
+
 	public void setFechaEntrega(String fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
 	
+
 
 	@Override
 	public String toString() {
