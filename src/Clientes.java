@@ -83,8 +83,8 @@ public class Clientes {
 	@Override
 	public String toString() {
 		
-	return "<cliente>\n\t<nombre>"+nombre +"</nombre>\n\t<apellidos>"+apellidos+"</apellidos>\n\t<email>"+email +"</email>\n\t<telefono>"+telefono +
-			"</telefono>\n\t<calle>"+calle +"</calle>\n\t<numero>"+numero +"</numero>\n\t<cp>"+cp +"</cp>\n\t<poblacion>"+poblacion +
-			"</poblacion>\n\t<pais>"+pais +"</pais>\n</cliente>";
+	return "\t\t<cliente>\n\t\t\t<nombre>"+nombre +"</nombre>\n\t\t\t<apellidos>"+apellidos+"</apellidos>\n\t\t\t<email>"+email +"</email>\n\t\t\t<telefono>"+telefono +
+			"</telefono>\n\t\t\t<calle>"+calle +"</calle>\n\t\t\t<numero>"+numero +"</numero>\n\t\t\t<cp>"+cp +"</cp>\n\t\t\t<poblacion>"+poblacion +
+			"</poblacion>\n\t\t\t<pais>"+pais +"</pais>\n\t\t</cliente>\n";
 	}
 }

@@ -108,9 +108,9 @@ public class Producto {
 	@Override
 	public String toString() {
 			
-	return "<producto>\n\t<codigo>"+codigo +"</codigo>\n\t<nombre>"+nombre+"</nombre>\n\t<descripcion>"+descripcion +"</descripcion>\n\t<stock>"+stock +
-			"</stock>\n\t<pasillo>"+pasillo +"</pasillo>\n\t<estanteria>"+estanteria +"</estanteria>\n\t<estante>"+estante +"</estante>\n\t" +
-			"<estado>"+estado +"</estado>\n</producto>";
+	return "\t\t<producto>\n\t\t\t<codigo>"+codigo +"</codigo>\n\t\t\t<nombre>"+nombre+"</nombre>\n\t\t\t<descripcion>"+descripcion +"</descripcion>\n\t\t\t<stock>"+stock +
+			"</stock>\n\t\t\t<pasillo>"+pasillo +"</pasillo>\n\t\t\t<estanteria>"+estanteria +"</estanteria>\n\t\t\t<estante>"+estante +"</estante>\n" +
+			"\t\t\t<estado>"+estado +"</estado>\n\t\t</producto>\n";
 	}
 	
 }

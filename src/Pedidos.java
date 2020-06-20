@@ -139,9 +139,9 @@ public class Pedidos {
 	@Override
 	public String toString() {
 	
-	return "<pedido>\n\t<productos>"+productos +"</productos>\n\t<cantidad>"+cantidad+"</cantidad>\n\t<calle>"+calle +"</calle>\n\t<numero>"+numero +
-			"</numero>\n\t<cp>"+cp +"</cp>\n\t<poblacion>"+poblacion +"</poblacion>\n\t<pais>"+pais +"</pais>\n\t<destinatario>"+destinatario +
-			"</destinatario>\n\t<fechaEntrega>"+fechaEntrega +"</fechaEntrega>\n</pedido>";
+	return "\t\t<pedido>\n\t\t\t<productos>"+productos +"</productos>\n\t\t\t<cantidad>"+cantidad+"</cantidad>\n\t\t\t<calle>"+calle +"</calle>\n\t\t\t<numero>"+numero +
+			"</numero>\n\t\t\t<cp>"+cp +"</cp>\n\t\t\t<poblacion>"+poblacion +"</poblacion>\n\t\t\t<pais>"+pais +"</pais>\n\t\t\t<destinatario>"+destinatario +
+			"</destinatario>\n\t\t\t<fechaEntrega>"+fechaEntrega +"</fechaEntrega>\n\t\t</pedido>\n";
 	}
 
 }

@@ -45,23 +45,28 @@ public class Main {
 		String root = "<almacen>\n";
 		String xml = "";
 		xml += header + root;
+		xml += "\t<productos>\n";
 		for(Producto p: productos) {
-			xml += "\t<productos>\n";
+			
 			xml += p;
-			xml += "\t</productos>\n";
+			
 		}
+		xml += "\t</productos>\n";
+		xml += "\t<clientes>\n";
 		for(Clientes c: clientes) {
-			xml += "\t<clientes>\n";
+			
 			xml += c;
-			xml += "\t</clientes>\n";
+			
 		}
+		xml += "\t</clientes>\n";
+		xml += "\t<pedidos>\n";
 		for(Pedidos ped: pedidos) {
-			xml += "\t<pedidos>\n";
+			
 			xml += ped;
-			xml += "\t</pedidos>\n"
-					+ "";
+			
 		}
-		String close_root = "\n</almacen>";
+		xml += "\t</pedidos>\n";
+		String close_root = "</almacen>";
 			
 		xml += close_root;
 		
@@ -174,7 +179,7 @@ public class Main {
 		
 		//Inicializacion datos pedido
 		String producto = null;
-		ArrayList<String> productos = new ArrayList<String>();
+		ArrayList<Producto> productos = new ArrayList<Producto>();
 		String calle = null;
 		int numero = 0;
 		int cp = 0;
@@ -190,7 +195,12 @@ public class Main {
 		producto = in.readLine();
 		do{
 			if(!producto.contentEquals("0")) {
-				productos.add(producto);
+				for(Producto prod: productos) {
+					if(prod.getNombre().equals(producto));
+					productos.add(prod);
+					System.out.println(prod);
+				}
+				
 				producto = in.readLine();
 			}
 		}while(!producto.contentEquals("0"));
