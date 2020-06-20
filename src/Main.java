@@ -65,7 +65,7 @@ public class Main {
 			
 		xml += close_root;
 		
-		writeToFile(xml, "../xmlAlmacen.xml");
+		writeToFile(xml, "xmlAlmacen.xml");
 		
 	}
 	
@@ -199,9 +199,9 @@ public class Main {
 		System.out.println("Introduce direccion de entrega:");
 		System.out.println("Calle:");
 		calle = in.readLine();
-		System.out.println("Número:");
+		System.out.println("Numero:");
 		numero = Integer.parseInt(in.readLine());;
-		System.out.println("Código Postal:");
+		System.out.println("Codigo Postal:");
 		cp = Integer.parseInt(in.readLine());;
 		System.out.println("Poblacion:");
 		poblacion = in.readLine();
@@ -211,7 +211,7 @@ public class Main {
 		System.out.println("Introduce nombre del destinatario:");
 		destinatario = in.readLine();
 		System.out.println("Introduce de fecha estimada de entrega:");
-		System.out.println("Introduce día previsto (dd):");
+		System.out.println("Introduce dia previsto (dd):");
 		fecha += in.readLine();
 		System.out.println("Introduce mes previsto (MM):");
 		fecha += in.readLine();
