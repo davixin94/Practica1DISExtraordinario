@@ -19,6 +19,7 @@ public class Main {
 		
 		ArrayList<Pedidos> pedidosTotal = new ArrayList<>();
 		ArrayList<Clientes> clientes = new ArrayList<Clientes>();
+
 		
 		while(menu != 4) {
 			generarMenu();
@@ -46,31 +47,40 @@ public class Main {
 		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\">\n";
 		String root = "<almacen>\n";
 		String xml = "";
+		String aux="";
 		xml += header + root;
 		xml += "\t<productos>\n";
 		for(Producto p: productos) {
-			
-			xml += p;
-			
+			xml += p;	
 		}
 		xml += "\t</productos>\n";
 		xml += "\t<clientes>\n";
 		for(Clientes c: clientes) {
-			
-			xml += c;
-			
+			xml += c;	
 		}
 		xml += "\t</clientes>\n";
 		xml += "\t<pedidos>\n";
 		for(Pedidos ped: pedidosTotal) {
-			
-			xml += ped;
-			
+			aux += ped;
+			aux=aux.replace("</producto>", "\t\t</producto>");
 		}
+		aux=aux.replace("<codigo>", "\t\t<codigo>");
+		aux=aux.replace("<nombre>", "\t\t<nombre>");
+		aux=aux.replace("<descripcion>", "\t\t<descripcion>");
+		aux=aux.replace("<stock>", "\t\t<stock>");
+		aux=aux.replace("<pasillo>", "\t\t<pasillo>");
+		aux=aux.replace("<estanteria>", "\t\t<estanteria>");
+		aux=aux.replace("<estante>", "\t\t<estante>");
+		aux=aux.replace("<estado>", "\t\t<estado>");
+		xml += aux;
 		xml += "\t</pedidos>\n";
 		String close_root = "</almacen>";
 			
 		xml += close_root;
+		
+		xml=xml.replace("[", "");
+		xml=xml.replace(",", "\t\t");
+		xml=xml.replace("]", "");
 		
 		writeToFile(xml, "xmlAlmacen.xml");
 		
@@ -224,9 +234,9 @@ public class Main {
 		destinatario = in.readLine();
 		System.out.println("Introduce de fecha estimada de entrega:");
 		System.out.println("Introduce dia previsto (dd):");
-		fecha += in.readLine();
+		fecha = in.readLine()+"/";
 		System.out.println("Introduce mes previsto (MM):");
-		fecha += in.readLine();
+		fecha += in.readLine()+"/";
 		System.out.println("Introduce año previsto (yyyy):");
 		fecha += in.readLine();
 		System.out.println("---FIN DE PEDIDO---");
