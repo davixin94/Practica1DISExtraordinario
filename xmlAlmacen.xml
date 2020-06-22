@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8">
+<almacen>
+	<productos>
+		<producto>
+			<codigo>123456789</codigo>
+			<nombre>Tomate</nombre>
+			<descripcion>Tomate</descripcion>
+			<stock>20</stock>
+			<pasillo>a</pasillo>
+			<estanteria>2</estanteria>
+			<estante>2</estante>
+			<estado>false</estado>
+		</producto>
+		<producto>
+			<codigo>321654987</codigo>
+			<nombre>Mechero</nombre>
+			<descripcion>Luz</descripcion>
+			<stock>100000</stock>
+			<pasillo>a</pasillo>
+			<estanteria>0</estanteria>
+			<estante>0</estante>
+			<estado>false</estado>
+		</producto>
+	</productos>
+	<clientes>
+	</clientes>
+	<pedidos>
+		<pedido>
+			<productos>
+	[		<producto>
+			<codigo>123456789</codigo>
+			<nombre>Tomate</nombre>
+			<descripcion>Tomate</descripcion>
+			<stock>20</stock>
+			<pasillo>a</pasillo>
+			<estanteria>2</estanteria>
+			<estante>2</estante>
+			<estado>false</estado>
+		</producto>
+, 		<producto>
+			<codigo>321654987</codigo>
+			<nombre>Mechero</nombre>
+			<descripcion>Luz</descripcion>
+			<stock>100000</stock>
+			<pasillo>a</pasillo>
+			<estanteria>0</estanteria>
+			<estante>0</estante>
+			<estado>false</estado>
+		</producto>
+]			</productos>
+			<cantidad>2</cantidad>
+			<calle>Moguer</calle>
+			<numero>1</numero>
+			<cp>28002</cp>
+			<poblacion>Madird</poblacion>
+			<pais>Espana</pais>
+			<destinatario>David Nieto pena</destinatario>
+			<fechaEntrega>null23062020</fechaEntrega>
+		</pedido>
+	</pedidos>
+</almacen>

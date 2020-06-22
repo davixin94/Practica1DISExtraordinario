@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 public class Main {
 
+	private static ArrayList<Producto> productos = new ArrayList<Producto>();
+	
+	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
@@ -14,9 +17,8 @@ public class Main {
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			
 		
-		ArrayList<Producto> productos = new ArrayList<Producto>();
+		ArrayList<Pedidos> pedidosTotal = new ArrayList<>();
 		ArrayList<Clientes> clientes = new ArrayList<Clientes>();
-		ArrayList<Pedidos> pedidos = new ArrayList<Pedidos>();
 		
 		while(menu != 4) {
 			generarMenu();
@@ -31,8 +33,8 @@ public class Main {
 				clientes.add(c);
 				break;
 			case 3:
-				Pedidos ped = subMenuPedidos();
-				pedidos.add(ped);
+				Pedidos ped = subMenuPedidos(productos);
+				pedidosTotal.add(ped);
 				break;
 			case 4:
 				break;
@@ -60,7 +62,7 @@ public class Main {
 		}
 		xml += "\t</clientes>\n";
 		xml += "\t<pedidos>\n";
-		for(Pedidos ped: pedidos) {
+		for(Pedidos ped: pedidosTotal) {
 			
 			xml += ped;
 			
@@ -160,7 +162,7 @@ public class Main {
         System.out.println("Introduce estante (0-5):");
         estante = Integer.parseInt(in.readLine());;
         System.out.println("---Fin de localizacion---");
-        System.out.println("Introduce si el producto esta en almacen (y/n):");
+        System.out.println("Pendiente de entrada en almacén (y/n):");
         estado_aux = in.readLine();
         if (estado_aux == "y" || estado_aux == "yes" || estado_aux == "si") {
             estado = true;
@@ -174,12 +176,12 @@ public class Main {
         return p;
     }
 	
-	public static Pedidos subMenuPedidos() throws IOException {
+	public static Pedidos subMenuPedidos(ArrayList<Producto> productos) throws IOException {
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
 		//Inicializacion datos pedido
 		String producto = null;
-		ArrayList<Producto> productos = new ArrayList<Producto>();
+		ArrayList<Producto> productosPedidos = new ArrayList<>();
 		String calle = null;
 		int numero = 0;
 		int cp = 0;
@@ -196,16 +198,16 @@ public class Main {
 		do{
 			if(!producto.contentEquals("0")) {
 				for(Producto prod: productos) {
-					if(prod.getNombre().equals(producto));
-					productos.add(prod);
-					System.out.println(prod);
+					if(prod.getNombre().equals(producto)) {
+						productosPedidos.add(prod);
+						System.out.println(producto + " añadido con éxito.");
+					}
 				}
-				
 				producto = in.readLine();
 			}
 		}while(!producto.contentEquals("0"));
 		System.out.println("Productos introducidos.");
-		System.out.println("Hay un total de " + (productos.size()) + " productos.");
+		System.out.println("Hay un total de " + (productosPedidos.size()) + " productos.");
 		System.out.println("Introduce direccion de entrega:");
 		System.out.println("Calle:");
 		calle = in.readLine();
@@ -229,8 +231,10 @@ public class Main {
 		fecha += in.readLine();
 		System.out.println("---FIN DE PEDIDO---");
 		
-		Pedidos p = new Pedidos(productos, productos.size(), calle, numero, cp,
+		Pedidos p = new Pedidos(productosPedidos, productosPedidos.size(), calle, numero, cp,
 				poblacion, pais, destinatario,fecha);
+		
+		
 		
 		return p;
 	}
