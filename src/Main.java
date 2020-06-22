@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -21,9 +23,9 @@ public class Main {
 		
 		ArrayList<Pedidos> pedidosTotal = new ArrayList<>();
 		ArrayList<Clientes> clientes = new ArrayList<Clientes>();
-
+		String imp="";
 		
-		while(menu != 4) {
+		while(menu != 5) {
 			generarMenu();
 			menu = Integer.parseInt(in.readLine());
 			switch (menu) {
@@ -40,6 +42,18 @@ public class Main {
 				pedidosTotal.add(ped);
 				break;
 			case 4:
+				InputStream is = new FileInputStream("xmlAlmacen.xml"); 
+				BufferedReader buf = new BufferedReader(new InputStreamReader(is)); 
+				String line = buf.readLine();
+				StringBuilder sb = new StringBuilder();
+				while(line != null)
+					{ 
+					sb.append(line).append("\n"); line = buf.readLine(); 
+					} 
+				imp += sb.toString();
+				System.out.println("Datos importados:\n"+imp);
+				break;
+			case 5:
 				break;
 			default:
 				System.out.println("Por favor, elija una opcion valida.");
@@ -50,6 +64,7 @@ public class Main {
 		String root = "<almacen>\n";
 		String xml = "";
 		String aux="";
+		xml += imp;
 		xml += header + root;
 		xml += "\t<productos>\n";
 		for(Producto p: productos) {
@@ -94,7 +109,8 @@ public class Main {
 		System.out.println("1.- Introducir producto");
 		System.out.println("2.- Introducir datos de cliente.");
 		System.out.println("3.- Introducir datos de pedido");
-		System.out.println("4.- Salir");
+		System.out.println("4.- Importar Datos");
+		System.out.println("4.- Guardar y Salir");
 	}
 	
 	public static Clientes subMenuCliente() throws IOException {
