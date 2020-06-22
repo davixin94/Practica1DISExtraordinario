@@ -1,0 +1,108 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT almacen (productos,clientes,pedidos)>
+<!ATTLIST almacen
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT clientes (cliente)+>
+<!ATTLIST clientes
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT pedidos (pedido)+>
+<!ATTLIST pedidos
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT cliente (nombre,apellidos,email,telefono,calle,numero,cp,
+                   poblacion,pais)>
+<!ATTLIST cliente
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT pedido (productos,cantidad,calle,numero,cp,poblacion,pais,
+                  destinatario,fechaEntrega)>
+<!ATTLIST pedido
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT apellidos (#PCDATA)>
+<!ATTLIST apellidos
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT email (#PCDATA)>
+<!ATTLIST email
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT telefono (#PCDATA)>
+<!ATTLIST telefono
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT cantidad (#PCDATA)>
+<!ATTLIST cantidad
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT destinatario (#PCDATA)>
+<!ATTLIST destinatario
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT fechaEntrega (#PCDATA)>
+<!ATTLIST fechaEntrega
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT productos (producto)+>
+<!ATTLIST productos
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT producto (codigo,nombre,descripcion,stock,pasillo,estanteria,
+                    estante,estado)>
+<!ATTLIST producto
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT codigo (#PCDATA)>
+<!ATTLIST codigo
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT descripcion (#PCDATA)>
+<!ATTLIST descripcion
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT stock (#PCDATA)>
+<!ATTLIST stock
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT pasillo (#PCDATA)>
+<!ATTLIST pasillo
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT estanteria (#PCDATA)>
+<!ATTLIST estanteria
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT estante (#PCDATA)>
+<!ATTLIST estante
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT estado (#PCDATA)>
+<!ATTLIST estado
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT nombre (#PCDATA)>
+<!ATTLIST nombre
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT calle (#PCDATA)>
+<!ATTLIST calle
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT numero (#PCDATA)>
+<!ATTLIST numero
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT cp (#PCDATA)>
+<!ATTLIST cp
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT poblacion (#PCDATA)>
+<!ATTLIST poblacion
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT pais (#PCDATA)>
+<!ATTLIST pais
+  xmlns CDATA #FIXED ''>

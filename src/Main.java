@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+
 public class Main {
 
 	private static ArrayList<Producto> productos = new ArrayList<Producto>();
@@ -44,7 +46,7 @@ public class Main {
 			}
 		}
 		
-		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\">\n";
+		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
 		String root = "<almacen>\n";
 		String xml = "";
 		String aux="";
@@ -259,6 +261,14 @@ public class Main {
 		} finally {
 			writer.close();
 		}
+	}
+	
+	public static void writeToJson(String xml, String fileName) throws IOException {
+		Gson gson = new Gson();
+		String json = gson.toJson(xml);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+		writer.write(json);
+		writer.close();
 	}
 
 }
