@@ -7,12 +7,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.XML;
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Main {
 
 	private static ArrayList<Producto> productos = new ArrayList<Producto>();
-	
+	private static ArrayList<Pedidos> pedidosTotal = new ArrayList<>();
+	private static ArrayList<Clientes> clientes = new ArrayList<Clientes>();
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
@@ -21,9 +27,6 @@ public class Main {
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			
 		
-		ArrayList<Pedidos> pedidosTotal = new ArrayList<>();
-		ArrayList<Clientes> clientes = new ArrayList<Clientes>();
-		String imp="";
 		
 		while(menu != 5) {
 			generarMenu();
@@ -42,6 +45,7 @@ public class Main {
 				pedidosTotal.add(ped);
 				break;
 			case 4:
+				String imp = "";
 				InputStream is = new FileInputStream("xmlAlmacen.xml"); 
 				BufferedReader buf = new BufferedReader(new InputStreamReader(is)); 
 				String line = buf.readLine();
@@ -51,8 +55,17 @@ public class Main {
 					sb.append(line).append("\n"); line = buf.readLine(); 
 					} 
 				imp += sb.toString();
+<<<<<<< HEAD
 				System.out.println("Datos importados:\n"+imp);
 				
+=======
+				
+				GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
+				Gson g = builder.create();
+				JSONObject json = XML.toJSONObject(imp);
+				String[] names = JSONObject.getNames(json);
+				importarDatos(json.toJSONArray((new JSONArray(names))));
+>>>>>>> developDavid
 				break;
 			case 5:
 				break;
@@ -69,6 +82,10 @@ public class Main {
 		imp=imp.replace(close_root, "");
 		String xml = "";
 		String aux="";
+<<<<<<< HEAD
+=======
+		
+>>>>>>> developDavid
 		xml += header + root;
 		xml += imp;
 		xml += "\t<productos>\n";
@@ -109,6 +126,74 @@ public class Main {
 		
 	}
 	
+	private static void importarDatos(JSONArray arr){
+		// TODO Auto-generated method stub
+		for(int i = 0; i<arr.length(); i++) {
+			JSONObject jsObject = arr.getJSONObject(i);
+			
+			for(int k = 0; k<=jsObject.getJSONObject("pedidos").length(); k++) {
+				Pedidos ped = new Pedidos();
+				ArrayList<Producto> listaProductos = new ArrayList<>();
+				
+				for(int l = 0; l<=jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getJSONObject("productos").length(); l++) {
+					JSONObject p = jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getJSONObject("productos").getJSONArray("producto").getJSONObject(l);
+					Producto pAux = new Producto();
+					
+					pAux.setCodigo(p.getInt("codigo"));
+					pAux.setDescripcion(p.getString("descripcion"));
+					pAux.setEstado(p.getBoolean("estado"));
+					pAux.setEstante(p.getInt("estante"));
+					pAux.setEstanteria(p.getInt("estanteria"));
+					pAux.setNombre(p.getString("nombre"));
+					pAux.setPasillo(p.getString("pasillo"));
+					pAux.setStock(p.getInt("stock"));
+					listaProductos.add(pAux);
+				}
+				ped.setProductos(listaProductos);
+				ped.setCalle(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("calle"));
+				ped.setCantidad(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getInt("cantidad"));
+				ped.setCp(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getInt("cp"));
+				ped.setDestinatario(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("destinatario"));
+				ped.setFechaEntrega(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("fechaEntrega"));
+				ped.setNumero(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getInt("numero"));
+				ped.setPais(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("pais"));
+				ped.setPoblacion(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("poblacion"));
+				pedidosTotal.add(ped);
+			}
+			for(int j = 0; j<=jsObject.getJSONObject("productos").length(); j++) {
+				Producto p = new Producto();
+				
+				p.setCodigo(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getInt("codigo"));
+				p.setDescripcion(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getString("descripcion"));
+				p.setEstado(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getBoolean("estado"));
+				p.setEstante(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getInt("estante"));
+				p.setEstanteria(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getInt("estanteria"));
+				p.setNombre(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getString("nombre"));
+				p.setPasillo(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getString("pasillo"));
+				p.setStock(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getInt("stock"));
+				
+				productos.add(p);
+			}
+			
+			for(int d = 0; d<=jsObject.getJSONObject("clientes").length(); d++) {
+				Clientes c = new Clientes();
+				c.setApellidos(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("apellidos"));
+				c.setCalle(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("calle"));
+				c.setCp(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getInt("cp"));
+				c.setEmail(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("email"));
+				c.setNombre(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("nombre"));
+				c.setNumero(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getInt("numero"));
+				c.setPais(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("pais"));
+				c.setPoblacion(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("poblacion"));
+				c.setTelefono(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getInt("telefono"));
+				clientes.add(c);
+			}
+				
+			
+		}
+		
+	}
+
 	public static void generarMenu() {
 		System.out.println("---------------");
 		System.out.println("Elija una opcion:");
@@ -173,7 +258,7 @@ public class Main {
         String nombre = null;
         String descripcion = null;
         int stock = 0;
-        char pasillo = ' ';
+        String pasillo = null;
         int estanteria = 0;
         int estante = 0;
         boolean estado = false;
@@ -190,7 +275,7 @@ public class Main {
         stock = Integer.parseInt(in.readLine());;
         System.out.println("Introduce la localizacion del producto en el almacen:");
         System.out.println("Pasillo (A-Z):");
-        pasillo = (in.readLine()).charAt(0);
+        pasillo = in.readLine();
         System.out.println("Estanteria (0-10):");
         estanteria = Integer.parseInt(in.readLine());;
         System.out.println("Introduce estante (0-5):");
@@ -223,18 +308,26 @@ public class Main {
 		String pais = null;
 		String destinatario = null;
 		String fecha = null;
+		int cantidad = 0;
 		
 		
 		System.out.println("Introduce datos del pedido:");
 		//IntroducciÃ³n de datos del pedido por el usuario
-		System.out.println("Introduce productos (presionar 0 para finalizar introduccion de productos):");
+		System.out.println("Introduce productos (presionar 0 para finalizar introduccion de productos):\n");
 		producto = in.readLine();
 		do{
 			if(!producto.contentEquals("0")) {
 				for(Producto prod: productos) {
 					if(prod.getNombre().equals(producto)) {
-						productosPedidos.add(prod);
-						System.out.println(producto + " añadido con éxito.");
+						System.out.println("Introduce cantidad: \n");
+						cantidad = Integer.parseInt(in.readLine());
+						if((prod.getStock() - cantidad)>0) {
+							prod.setStock(prod.getStock() - cantidad);
+							productosPedidos.add(prod);
+							System.out.println(producto + " añadido con éxito.\n");
+						}else {
+							System.out.println("No hay suficiente stock!\n");
+						}
 					}
 				}
 				producto = in.readLine();
@@ -274,7 +367,8 @@ public class Main {
 	}
 	
 	public static void writeToFile(String xml, String fileName) throws IOException {
-	    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+	    
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
 	    try {
 			writer.write(xml);
 		} catch (IOException e) {
@@ -287,9 +381,9 @@ public class Main {
 	
 	public static void writeToJson(String xml, String fileName) throws IOException {
 		Gson gson = new Gson();
-		String json = gson.toJson(xml);
+		JSONObject json = XML.toJSONObject(xml);
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-		writer.write(json);
+		writer.write(json.toString());
 		writer.close();
 	}
 

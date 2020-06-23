@@ -5,13 +5,13 @@ public class Producto {
 	private String nombre;
 	private String descripcion;
 	private int stock;
-	private char pasillo;
+	private String pasillo;
 	private int estanteria;
 	private	int estante;
 	private boolean estado; //Pendientes
 	
 	
-	public Producto(int codigo, String nombre, String descripcion, int stock, char pasillo, int estanteria, int estante,
+	public Producto(int codigo, String nombre, String descripcion, int stock, String pasillo, int estanteria, int estante,
 			boolean estado) {
 		super();
 		this.codigo = codigo;
@@ -22,6 +22,10 @@ public class Producto {
 		this.estanteria = estanteria;
 		this.estante = estante;
 		this.estado = estado;
+	}
+	
+	public Producto() {
+		
 	}
 
 
@@ -65,12 +69,12 @@ public class Producto {
 	}
 
 
-	public char getPasillo() {
+	public String getPasillo() {
 		return pasillo;
 	}
 
 
-	public void setPasillo(char pasillo) {
+	public void setPasillo(String pasillo) {
 		this.pasillo = pasillo;
 	}
 
