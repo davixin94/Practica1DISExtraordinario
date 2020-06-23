@@ -105,6 +105,7 @@ public class Main {
 		xml=xml.replace("]", "");
 		
 		writeToFile(xml, "xmlAlmacen.xml");
+		writeToJson(xml, "jsonAlmacen.json");
 		
 	}
 	
