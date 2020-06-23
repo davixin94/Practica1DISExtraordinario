@@ -64,7 +64,7 @@
 					<nombre>Tomate</nombre>
 					<descripcion>tomate</descripcion>
 					<stock>9</stock>
-					<pasillo>1</pasillo>
+					<pasillo>a</pasillo>
 					<estanteria>1</estanteria>
 					<estante>1</estante>
 					<estado>false</estado>
@@ -87,6 +87,38 @@
 			<poblacion>m</poblacion>
 			<pais>m</pais>
 			<destinatario>w</destinatario>
+			<fechaEntrega>22/12/2020</fechaEntrega>
+		</pedido>
+		<pedido>
+			<productos>
+				<producto>
+					<codigo>1112223334</codigo>
+					<nombre>Tomate</nombre>
+					<descripcion>tomate</descripcion>
+					<stock>9</stock>
+					<pasillo>1</pasillo>
+					<estanteria>1</estanteria>
+					<estante>1</estante>
+					<estado>false</estado>
+				</producto>
+		 		<producto>
+					<codigo>0</codigo>
+					<nombre>Mechero</nombre>
+					<descripcion>Luz</descripcion>
+					<stock>197</stock>
+					<pasillo>a</pasillo>
+					<estanteria>3</estanteria>
+					<estante>3</estante>
+					<estado>false</estado>
+				</producto>
+			</productos>
+			<cantidad>3</cantidad>
+			<calle>dd</calle>
+			<numero>222</numero>
+			<cp>2222222222</cp>
+			<poblacion>mddddddd</poblacion>
+			<pais>mdddddddddd</pais>
+			<destinatario>wddddddddddd</destinatario>
 			<fechaEntrega>22/12/2020</fechaEntrega>
 		</pedido>
 	</pedidos>

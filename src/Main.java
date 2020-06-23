@@ -1,24 +1,21 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
 import com.google.gson.reflect.*;
+import com.google.gson.stream.JsonReader;
 
 public class Main {
 
@@ -54,13 +51,24 @@ public class Main {
 				pedidosTotal.add(ped);
 				break;
 			case 4:
-				JsonReader reader = new JsonReader(new FileReader("jsonAlmacen.json"));
-				Gson g = new Gson();
-				reader.setLenient(true);
+				String imp = "";
+				InputStream is = new FileInputStream("xmlAlmacen.xml"); 
+				BufferedReader buf = new BufferedReader(new InputStreamReader(is)); 
+				String line = buf.readLine();
+				StringBuilder sb = new StringBuilder();
+				while(line != null)
+					{ 
+					sb.append(line).append("\n"); line = buf.readLine(); 
+					} 
+				imp += sb.toString();
 				
-				Almacen json = g.fromJson(reader, new TypeToken<Almacen>(){}.getType());
-				importarDatos(json);
-				System.out.println("Datos importados:\n"+ json.toString());
+				GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
+				Gson g = builder.create();
+				JSONObject json = XML.toJSONObject(imp);
+				String[] names = JSONObject.getNames(json);
+				
+				String aux = g.toJson(json);
+				importarDatos(json.toJSONArray((new JSONArray(names))));
 				datosJsonString = json.toString();
 				break;
 			case 5:
@@ -114,12 +122,87 @@ public class Main {
 		
 	}
 	
-	private static void importarDatos(Object o){
+	private static void importarDatos(JSONArray arr){
 		// TODO Auto-generated method stub
-
+		
+		
+		for(int i = 0; i<arr.length(); i++) {
+			JSONObject jsObject = arr.getJSONObject(i);
+			
+			for(int k = 0; k<jsObject.getJSONObject("pedidos").length(); k++) {
+				
+				Pedidos ped = new Pedidos();
+				ArrayList<Producto> listaProductos = new ArrayList<>();
+				
+				for(int l = 0; l<=jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getJSONObject("productos").length(); l++) {
+					JSONObject p = jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getJSONObject("productos").getJSONArray("producto").getJSONObject(l);
+					Producto pAux = new Producto();
+					
+					pAux.setCodigo(p.getInt("codigo"));
+					pAux.setDescripcion(p.getString("descripcion"));
+					pAux.setEstado(p.getBoolean("estado"));
+					pAux.setEstante(p.getInt("estante"));
+					pAux.setEstanteria(p.getInt("estanteria"));
+					pAux.setNombre(p.getString("nombre"));
+					pAux.setPasillo(p.getString("pasillo"));
+					pAux.setStock(p.getInt("stock"));
+					listaProductos.add(pAux);
+				}
+				ped.setProductos(listaProductos);
+				ped.setCalle(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("calle"));
+				ped.setCantidad(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getInt("cantidad"));
+				ped.setCp(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getInt("cp"));
+				ped.setDestinatario(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("destinatario"));
+				ped.setFechaEntrega(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("fechaEntrega"));
+				ped.setNumero(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getInt("numero"));
+				ped.setPais(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("pais"));
+				ped.setPoblacion(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("poblacion"));
+				System.out.println("Añaden" + k);
+				pedidosTotal.add(ped);
+			}
+			System.out.println(pedidosTotal.toString());
+			for(int j = 0; j<jsObject.getJSONObject("productos").length(); j++) {
+				Producto p = new Producto();
+				JSONObject jsAuxProductos = jsObject.getJSONObject("productos");
+				JSONArray arrAuxProductos = jsAuxProductos.getJSONArray("producto");
+				JSONObject prodIterator = arrAuxProductos.getJSONObject(j);
+				p.setCodigo(prodIterator.getInt("codigo"));
+				p.setDescripcion(prodIterator.getString("descripcion"));
+				p.setEstado(prodIterator.getBoolean("estado"));
+				p.setEstante(prodIterator.getInt("estante"));
+				p.setEstanteria(prodIterator.getInt("estanteria"));
+				p.setNombre(prodIterator.getString("nombre"));
+				p.setPasillo(prodIterator.getString("pasillo"));
+				p.setStock(prodIterator.getInt("stock"));
+				
+				productos.add(p);
+			}
+			
+			for(int d = 0; d<jsObject.getJSONObject("clientes").length(); d++) {
+				Clientes c = new Clientes();
+				JSONObject jsAuxClientes = jsObject.getJSONObject("clientes");
+				JSONArray arrAuxClientes = jsObject.getJSONObject("clientes").getJSONArray("cliente");
+				JSONObject clIterator = arrAuxClientes.getJSONObject(d);
+				c.setApellidos(clIterator.getString("apellidos"));
+				c.setCalle(clIterator.getString("calle"));
+				c.setCp(clIterator.getInt("cp"));
+				c.setEmail(clIterator.getString("email"));
+				c.setNombre(clIterator.getString("nombre"));
+				c.setNumero(clIterator.getInt("numero"));
+				c.setPais(clIterator.getString("pais"));
+				c.setPoblacion(clIterator.getString("poblacion"));
+				c.setTelefono(clIterator.getInt("telefono"));
+				clientes.add(c);
+			}
+				
+			
+		}
 		pedidosTotal = almacen.getPedidos();
+		System.out.println("esto son los pedidos: " + pedidosTotal.toString());
 		productos = almacen.getProductos();	
+		System.out.println("Esto son los productos: " + productos.toString());
 		clientes = almacen.getClientes();
+		System.out.println("Esto son los clientes: " + clientes.toString());
 	}
 
 	public static void generarMenu() {
@@ -186,7 +269,7 @@ public class Main {
         String nombre = null;
         String descripcion = null;
         int stock = 0;
-        char pasillo = ' ';
+        String pasillo = null;
         int estanteria = 0;
         int estante = 0;
         boolean estado = false;
@@ -203,7 +286,7 @@ public class Main {
         stock = Integer.parseInt(in.readLine());;
         System.out.println("Introduce la localizacion del producto en el almacen:");
         System.out.println("Pasillo (A-Z):");
-        pasillo = (in.readLine()).charAt(0);
+        pasillo = in.readLine();
         System.out.println("Estanteria (0-10):");
         estanteria = Integer.parseInt(in.readLine());;
         System.out.println("Introduce estante (0-5):");

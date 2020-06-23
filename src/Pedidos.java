@@ -27,7 +27,9 @@ public class Pedidos {
 		this.fechaEntrega = fechaEntrega;
 	}
 
-
+	public Pedidos() {
+		
+	}
 	public ArrayList<Producto> getProductos() {
 		return productos;
 	}

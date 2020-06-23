@@ -11,7 +11,9 @@ public class Clientes {
 	private String poblacion;
 	private String pais;
 	
-	
+	public Clientes() {
+		
+	}
 	
 	public Clientes(String nombre, String apellidos, String email, int telefono, String calle, int numero, int cp,
 			String poblacion, String pais) {
