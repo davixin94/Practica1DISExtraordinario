@@ -1,18 +1,31 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+
+import org.json.JSONObject;
+import org.json.XML;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.reflect.*;
 
 public class Main {
 
 	private static ArrayList<Producto> productos = new ArrayList<Producto>();
-	
+	private static ArrayList<Pedidos> pedidosTotal = new ArrayList<>();
+	private static ArrayList<Clientes> clientes = new ArrayList<Clientes>();
+	private static Almacen almacen = new Almacen();
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
@@ -21,9 +34,8 @@ public class Main {
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			
 		
-		ArrayList<Pedidos> pedidosTotal = new ArrayList<>();
-		ArrayList<Clientes> clientes = new ArrayList<Clientes>();
-		String imp="";
+		
+		String datosJsonString = "";
 		
 		while(menu != 5) {
 			generarMenu();
@@ -42,16 +54,14 @@ public class Main {
 				pedidosTotal.add(ped);
 				break;
 			case 4:
-				InputStream is = new FileInputStream("xmlAlmacen.xml"); 
-				BufferedReader buf = new BufferedReader(new InputStreamReader(is)); 
-				String line = buf.readLine();
-				StringBuilder sb = new StringBuilder();
-				while(line != null)
-					{ 
-					sb.append(line).append("\n"); line = buf.readLine(); 
-					} 
-				imp += sb.toString();
-				System.out.println("Datos importados:\n"+imp);
+				JsonReader reader = new JsonReader(new FileReader("jsonAlmacen.json"));
+				Gson g = new Gson();
+				reader.setLenient(true);
+				
+				Almacen json = g.fromJson(reader, new TypeToken<Almacen>(){}.getType());
+				importarDatos(json);
+				System.out.println("Datos importados:\n"+ json.toString());
+				datosJsonString = json.toString();
 				break;
 			case 5:
 				break;
@@ -64,7 +74,7 @@ public class Main {
 		String root = "<almacen>\n";
 		String xml = "";
 		String aux="";
-		xml += imp;
+		
 		xml += header + root;
 		xml += "\t<productos>\n";
 		for(Producto p: productos) {
@@ -100,9 +110,18 @@ public class Main {
 		xml=xml.replace("]", "");
 		
 		writeToFile(xml, "xmlAlmacen.xml");
+		writeToJson(xml, "jsonAlmacen.json");
 		
 	}
 	
+	private static void importarDatos(Object o){
+		// TODO Auto-generated method stub
+
+		pedidosTotal = almacen.getPedidos();
+		productos = almacen.getProductos();	
+		clientes = almacen.getClientes();
+	}
+
 	public static void generarMenu() {
 		System.out.println("---------------");
 		System.out.println("Elija una opcion:");
@@ -110,7 +129,7 @@ public class Main {
 		System.out.println("2.- Introducir datos de cliente.");
 		System.out.println("3.- Introducir datos de pedido");
 		System.out.println("4.- Importar Datos");
-		System.out.println("4.- Guardar y Salir");
+		System.out.println("5.- Guardar y Salir");
 	}
 	
 	public static Clientes subMenuCliente() throws IOException {
@@ -217,18 +236,26 @@ public class Main {
 		String pais = null;
 		String destinatario = null;
 		String fecha = null;
+		int cantidad = 0;
 		
 		
 		System.out.println("Introduce datos del pedido:");
 		//IntroducciÃ³n de datos del pedido por el usuario
-		System.out.println("Introduce productos (presionar 0 para finalizar introduccion de productos):");
+		System.out.println("Introduce productos (presionar 0 para finalizar introduccion de productos):\n");
 		producto = in.readLine();
 		do{
 			if(!producto.contentEquals("0")) {
 				for(Producto prod: productos) {
 					if(prod.getNombre().equals(producto)) {
-						productosPedidos.add(prod);
-						System.out.println(producto + " añadido con éxito.");
+						System.out.println("Introduce cantidad: \n");
+						cantidad = Integer.parseInt(in.readLine());
+						if((prod.getStock() - cantidad)>0) {
+							prod.setStock(prod.getStock() - cantidad);
+							productosPedidos.add(prod);
+							System.out.println(producto + " añadido con éxito.\n");
+						}else {
+							System.out.println("No hay suficiente stock!\n");
+						}
 					}
 				}
 				producto = in.readLine();
@@ -281,9 +308,9 @@ public class Main {
 	
 	public static void writeToJson(String xml, String fileName) throws IOException {
 		Gson gson = new Gson();
-		String json = gson.toJson(xml);
+		JSONObject json = XML.toJSONObject(xml);
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-		writer.write(json);
+		writer.write(json.toString());
 		writer.close();
 	}
 
