@@ -52,6 +52,7 @@ public class Main {
 					} 
 				imp += sb.toString();
 				System.out.println("Datos importados:\n"+imp);
+				
 				break;
 			case 5:
 				break;
@@ -62,10 +63,14 @@ public class Main {
 		
 		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
 		String root = "<almacen>\n";
+		String close_root = "\n</almacen>";
+		imp=imp.replace(header, "");
+		imp=imp.replace(root, "");
+		imp=imp.replace(close_root, "");
 		String xml = "";
 		String aux="";
-		xml += imp;
 		xml += header + root;
+		xml += imp;
 		xml += "\t<productos>\n";
 		for(Producto p: productos) {
 			xml += p;	
@@ -90,8 +95,8 @@ public class Main {
 		aux=aux.replace("<estante>", "\t\t<estante>");
 		aux=aux.replace("<estado>", "\t\t<estado>");
 		xml += aux;
-		xml += "\t</pedidos>\n";
-		String close_root = "</almacen>";
+		xml += "\t</pedidos>";
+		
 			
 		xml += close_root;
 		
@@ -110,7 +115,7 @@ public class Main {
 		System.out.println("2.- Introducir datos de cliente.");
 		System.out.println("3.- Introducir datos de pedido");
 		System.out.println("4.- Importar Datos");
-		System.out.println("4.- Guardar y Salir");
+		System.out.println("5.- Guardar y Salir");
 	}
 	
 	public static Clientes subMenuCliente() throws IOException {

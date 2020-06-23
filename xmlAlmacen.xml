@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <almacen>
 	<productos>
 		<producto>
@@ -58,7 +58,7 @@
 					<estanteria>2</estanteria>
 					<estante>2</estante>
 					<estado>false</estado>
-						</producto>
+				</producto>
 		 		<producto>
 					<codigo>321654987</codigo>
 					<nombre>Mechero</nombre>
@@ -68,7 +68,7 @@
 					<estanteria>5</estanteria>
 					<estante>5</estante>
 					<estado>false</estado>
-						</producto>
+				</producto>
 			</productos>
 			<cantidad>2</cantidad>
 			<calle>Moguer</calle>
