@@ -2,124 +2,125 @@
 <almacen>
 	<productos>
 		<producto>
-			<codigo>1112223334</codigo>
+			<codigo>123456789</codigo>
 			<nombre>Tomate</nombre>
 			<descripcion>tomate</descripcion>
-			<stock>9</stock>
-			<pasillo>1</pasillo>
-			<estanteria>1</estanteria>
-			<estante>1</estante>
-			<estado>false</estado>
-		</producto>
-		<producto>
-			<codigo>0</codigo>
-			<nombre>D</nombre>
-			<descripcion>d</descripcion>
-			<stock>20</stock>
+			<stock>18</stock>
 			<pasillo>a</pasillo>
-			<estanteria>1</estanteria>
-			<estante>1</estante>
+			<estanteria>2</estanteria>
+			<estante>2</estante>
 			<estado>false</estado>
 		</producto>
 		<producto>
-			<codigo>0</codigo>
+			<codigo>456987321</codigo>
 			<nombre>Mechero</nombre>
 			<descripcion>Luz</descripcion>
-			<stock>197</stock>
-			<pasillo>a</pasillo>
-			<estanteria>3</estanteria>
-			<estante>3</estante>
+			<stock>180</stock>
+			<pasillo>b</pasillo>
+			<estanteria>2</estanteria>
+			<estante>2</estante>
 			<estado>false</estado>
 		</producto>
 	</productos>
 	<clientes>
 		<cliente>
-			<nombre>d</nombre>
-			<apellidos>d</apellidos>
-			<email>d@gm.com</email>
-			<telefono>222333444</telefono>
+			<nombre>Da</nombre>
+			<apellidos>aa</apellidos>
+			<email>w@gmail.com</email>
+			<telefono>222</telefono>
 			<calle>c</calle>
-			<numero>2</numero>
-			<cp>2</cp>
-			<poblacion>m</poblacion>
-			<pais>m</pais>
+			<numero>22</numero>
+			<cp>22</cp>
+			<poblacion>c</poblacion>
+			<pais>c</pais>
 		</cliente>
 		<cliente>
-			<nombre>Mo</nombre>
-			<apellidos>as</apellidos>
-			<email>a@c.vom</email>
-			<telefono>2</telefono>
+			<nombre>cccccs</nombre>
+			<apellidos>ssss</apellidos>
+			<email>s@ss.c</email>
+			<telefono>22333</telefono>
+			<calle>ww</calle>
+			<numero>33</numero>
+			<cp>333333</cp>
+			<poblacion>wewww</poblacion>
+			<pais>qqqqqqqqq</pais>
+		</cliente>
+		<cliente>
+			<nombre>Ca</nombre>
+			<apellidos>ca</apellidos>
+			<email>ca@gmail.com</email>
+			<telefono>66</telefono>
 			<calle>c</calle>
 			<numero>2</numero>
-			<cp>2</cp>
+			<cp>26</cp>
 			<poblacion>c</poblacion>
-			<pais>s</pais>
+			<pais>c</pais>
 		</cliente>
 	</clientes>
 	<pedidos>
 		<pedido>
 			<productos>
 				<producto>
-					<codigo>1112223334</codigo>
+					<codigo>123456789</codigo>
 					<nombre>Tomate</nombre>
 					<descripcion>tomate</descripcion>
-					<stock>9</stock>
+					<stock>18</stock>
 					<pasillo>a</pasillo>
-					<estanteria>1</estanteria>
-					<estante>1</estante>
+					<estanteria>2</estanteria>
+					<estante>2</estante>
 					<estado>false</estado>
-				</producto>
+						</producto>
 		 		<producto>
-					<codigo>0</codigo>
+					<codigo>456987321</codigo>
 					<nombre>Mechero</nombre>
 					<descripcion>Luz</descripcion>
-					<stock>197</stock>
-					<pasillo>a</pasillo>
-					<estanteria>3</estanteria>
-					<estante>3</estante>
+					<stock>180</stock>
+					<pasillo>b</pasillo>
+					<estanteria>2</estanteria>
+					<estante>2</estante>
 					<estado>false</estado>
-				</producto>
+						</producto>
 			</productos>
 			<cantidad>2</cantidad>
 			<calle>m</calle>
 			<numero>2</numero>
 			<cp>2</cp>
-			<poblacion>m</poblacion>
-			<pais>m</pais>
-			<destinatario>w</destinatario>
-			<fechaEntrega>22/12/2020</fechaEntrega>
+			<poblacion>d</poblacion>
+			<pais>d</pais>
+			<destinatario>dddddddd</destinatario>
+			<fechaEntrega>06/03/2020</fechaEntrega>
 		</pedido>
 		<pedido>
 			<productos>
 				<producto>
-					<codigo>1112223334</codigo>
+					<codigo>123456789</codigo>
 					<nombre>Tomate</nombre>
 					<descripcion>tomate</descripcion>
-					<stock>9</stock>
-					<pasillo>1</pasillo>
-					<estanteria>1</estanteria>
-					<estante>1</estante>
+					<stock>18</stock>
+					<pasillo>a</pasillo>
+					<estanteria>2</estanteria>
+					<estante>2</estante>
 					<estado>false</estado>
 				</producto>
 		 		<producto>
-					<codigo>0</codigo>
+					<codigo>456987321</codigo>
 					<nombre>Mechero</nombre>
 					<descripcion>Luz</descripcion>
-					<stock>197</stock>
-					<pasillo>a</pasillo>
-					<estanteria>3</estanteria>
-					<estante>3</estante>
+					<stock>180</stock>
+					<pasillo>b</pasillo>
+					<estanteria>2</estanteria>
+					<estante>2</estante>
 					<estado>false</estado>
 				</producto>
 			</productos>
 			<cantidad>3</cantidad>
-			<calle>dd</calle>
-			<numero>222</numero>
-			<cp>2222222222</cp>
-			<poblacion>mddddddd</poblacion>
-			<pais>mdddddddddd</pais>
-			<destinatario>wddddddddddd</destinatario>
-			<fechaEntrega>22/12/2020</fechaEntrega>
+			<calle>mssss</calle>
+			<numero>2</numero>
+			<cp>2</cp>
+			<poblacion>dss</poblacion>
+			<pais>da</pais>
+			<destinatario>dddddddd</destinatario>
+			<fechaEntrega>06/03/2020</fechaEntrega>
 		</pedido>
 	</pedidos>
 </almacen>

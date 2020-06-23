@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,15 +13,12 @@ import org.json.XML;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.*;
-import com.google.gson.stream.JsonReader;
 
 public class Main {
 
 	private static ArrayList<Producto> productos = new ArrayList<Producto>();
 	private static ArrayList<Pedidos> pedidosTotal = new ArrayList<>();
 	private static ArrayList<Clientes> clientes = new ArrayList<Clientes>();
-	private static Almacen almacen = new Almacen();
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
@@ -31,8 +27,6 @@ public class Main {
 		java.io.BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			
 		
-		
-		String datosJsonString = "";
 		
 		while(menu != 5) {
 			generarMenu();
@@ -66,10 +60,7 @@ public class Main {
 				Gson g = builder.create();
 				JSONObject json = XML.toJSONObject(imp);
 				String[] names = JSONObject.getNames(json);
-				
-				String aux = g.toJson(json);
 				importarDatos(json.toJSONArray((new JSONArray(names))));
-				datosJsonString = json.toString();
 				break;
 			case 5:
 				break;
@@ -124,13 +115,10 @@ public class Main {
 	
 	private static void importarDatos(JSONArray arr){
 		// TODO Auto-generated method stub
-		
-		
 		for(int i = 0; i<arr.length(); i++) {
 			JSONObject jsObject = arr.getJSONObject(i);
 			
-			for(int k = 0; k<jsObject.getJSONObject("pedidos").length(); k++) {
-				
+			for(int k = 0; k<=jsObject.getJSONObject("pedidos").length(); k++) {
 				Pedidos ped = new Pedidos();
 				ArrayList<Producto> listaProductos = new ArrayList<>();
 				
@@ -157,52 +145,40 @@ public class Main {
 				ped.setNumero(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getInt("numero"));
 				ped.setPais(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("pais"));
 				ped.setPoblacion(jsObject.getJSONObject("pedidos").getJSONArray("pedido").getJSONObject(k).getString("poblacion"));
-				System.out.println("Añaden" + k);
 				pedidosTotal.add(ped);
 			}
-			System.out.println(pedidosTotal.toString());
-			for(int j = 0; j<jsObject.getJSONObject("productos").length(); j++) {
+			for(int j = 0; j<=jsObject.getJSONObject("productos").length(); j++) {
 				Producto p = new Producto();
-				JSONObject jsAuxProductos = jsObject.getJSONObject("productos");
-				JSONArray arrAuxProductos = jsAuxProductos.getJSONArray("producto");
-				JSONObject prodIterator = arrAuxProductos.getJSONObject(j);
-				p.setCodigo(prodIterator.getInt("codigo"));
-				p.setDescripcion(prodIterator.getString("descripcion"));
-				p.setEstado(prodIterator.getBoolean("estado"));
-				p.setEstante(prodIterator.getInt("estante"));
-				p.setEstanteria(prodIterator.getInt("estanteria"));
-				p.setNombre(prodIterator.getString("nombre"));
-				p.setPasillo(prodIterator.getString("pasillo"));
-				p.setStock(prodIterator.getInt("stock"));
+				
+				p.setCodigo(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getInt("codigo"));
+				p.setDescripcion(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getString("descripcion"));
+				p.setEstado(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getBoolean("estado"));
+				p.setEstante(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getInt("estante"));
+				p.setEstanteria(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getInt("estanteria"));
+				p.setNombre(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getString("nombre"));
+				p.setPasillo(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getString("pasillo"));
+				p.setStock(jsObject.getJSONObject("productos").getJSONArray("producto").getJSONObject(j).getInt("stock"));
 				
 				productos.add(p);
 			}
 			
-			for(int d = 0; d<jsObject.getJSONObject("clientes").length(); d++) {
+			for(int d = 0; d<=jsObject.getJSONObject("clientes").length(); d++) {
 				Clientes c = new Clientes();
-				JSONObject jsAuxClientes = jsObject.getJSONObject("clientes");
-				JSONArray arrAuxClientes = jsObject.getJSONObject("clientes").getJSONArray("cliente");
-				JSONObject clIterator = arrAuxClientes.getJSONObject(d);
-				c.setApellidos(clIterator.getString("apellidos"));
-				c.setCalle(clIterator.getString("calle"));
-				c.setCp(clIterator.getInt("cp"));
-				c.setEmail(clIterator.getString("email"));
-				c.setNombre(clIterator.getString("nombre"));
-				c.setNumero(clIterator.getInt("numero"));
-				c.setPais(clIterator.getString("pais"));
-				c.setPoblacion(clIterator.getString("poblacion"));
-				c.setTelefono(clIterator.getInt("telefono"));
+				c.setApellidos(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("apellidos"));
+				c.setCalle(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("calle"));
+				c.setCp(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getInt("cp"));
+				c.setEmail(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("email"));
+				c.setNombre(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("nombre"));
+				c.setNumero(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getInt("numero"));
+				c.setPais(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("pais"));
+				c.setPoblacion(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getString("poblacion"));
+				c.setTelefono(jsObject.getJSONObject("clientes").getJSONArray("cliente").getJSONObject(d).getInt("telefono"));
 				clientes.add(c);
 			}
 				
 			
 		}
-		pedidosTotal = almacen.getPedidos();
-		System.out.println("esto son los pedidos: " + pedidosTotal.toString());
-		productos = almacen.getProductos();	
-		System.out.println("Esto son los productos: " + productos.toString());
-		clientes = almacen.getClientes();
-		System.out.println("Esto son los clientes: " + clientes.toString());
+		
 	}
 
 	public static void generarMenu() {
@@ -378,7 +354,8 @@ public class Main {
 	}
 	
 	public static void writeToFile(String xml, String fileName) throws IOException {
-	    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+	    
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
 	    try {
 			writer.write(xml);
 		} catch (IOException e) {
